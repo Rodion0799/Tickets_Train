@@ -64,13 +64,45 @@ fun removeTicket(listTicket: MutableList<Ticket>) {
 
     print("Выберите ID: ")
     val userID = readLine()!!.trim().toIntOrNull()
-    if (userID == null || userID < 1  || userID > listTicket.size) {
+    if (userID == null || userID < 1 || userID > listTicket.size) {
         throw IllegalArgumentException("Ошибка!")
     }
 
     val index = userID - 1
     listTicket.removeAt(index)
     println("Билет успешно удален!\n")
+}
+
+/**
+ * Поиск билетов
+ */
+fun ticketSearch(listTicket: MutableList<Ticket>) {
+    if (listTicket.isEmpty()) {
+        println("У вас нету билетов!\n")
+        return
+    }
+
+    println("Поиск:")
+    print("Введите город отправления, или город прибытия: ")
+    val userCity = readLine()!!.trim()
+    if (userCity.isBlank()) {
+        println("Ошибка!\n")
+        return
+    }
+
+    val search = listTicket.filter {
+        userCity == it.departures || userCity == it.arrival
+    }
+
+    if (search.isEmpty()) {
+        println("Не найдено!\n")
+        return
+    }
+
+    search.forEachIndexed { index, ticket ->
+        println("${index + 1}. ${ticket.name} (${ticket.age}) - ${ticket.departures} -> ${ticket.arrival}")
+    }
+    println()
 }
 
 /**

@@ -6,10 +6,10 @@ package app
 fun main() {
     val listTicket = mutableListOf<Ticket>()
     while (true) {
-        println("1. Добавить билет\n2. Мои билеты\n3. Удалить билет\n4. Выход")
+        println("1. Добавить билет\n2. Мои билеты\n3. Удалить билет\n4. Поиск\n5. Выход")
         print("Введите ID -> ")
         val userIdTicket = readLine()!!.trim().toIntOrNull()
-        if (userIdTicket == null || userIdTicket !in 1..4) {
+        if (userIdTicket == null || userIdTicket !in 1..5) {
             println("Ошибка!")
             return
         }
@@ -17,7 +17,8 @@ fun main() {
             1 -> addTicket(listTicket)
             2 -> myTicket(listTicket)
             3 -> removeTicket(listTicket)
-            4 -> {
+            4 -> ticketSearch(listTicket)
+            5 -> {
                 exit()
                 break
             }
