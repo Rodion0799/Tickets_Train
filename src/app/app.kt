@@ -1,5 +1,7 @@
 package app
 
+typealias TicketList = MutableList<Ticket>
+val ERROR = IllegalArgumentException("Ошибка!")
 /**
  * Start
  */
@@ -10,7 +12,7 @@ fun main() {
         print("Введите ID -> ")
         val userIdTicket = readLine()!!.trim().toIntOrNull()
         if (userIdTicket == null || userIdTicket !in 1..5) {
-            println("Ошибка!")
+            println(ERROR.message)
             return
         }
         when (userIdTicket) {

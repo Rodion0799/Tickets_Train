@@ -4,30 +4,34 @@ package app
 /**
  * Добавления билета в listTicket
  */
-fun addTicket(listTicket: MutableList<Ticket>) {
+fun addTicket(listTicket: TicketList) {
     println("Введите данные, для покупки билета:")
     print("Имя -> ")
     val userName = readLine()!!.trim()
     if (userName.isBlank()) {
-        throw IllegalArgumentException("Ошибка!")
+        println(ERROR.message)
+        return
     }
 
     print("Возвраст -> ")
     val userAge = readLine()!!.trim().toIntOrNull()
     if (userAge == null || userAge <= 0 || userAge > 95) {
-        throw IllegalArgumentException("Ошибка!")
+        println(ERROR.message)
+        return
     }
 
     print("Город отправления -> ")
     val userDepartures = readLine()!!.trim()
     if (userDepartures.isBlank()) {
-        throw IllegalArgumentException("Ошибка!")
+        println(ERROR.message)
+        return
     }
 
     print("Город прибытия -> ")
     val userArrival = readLine()!!.trim()
     if (userArrival.isBlank()) {
-        throw IllegalArgumentException("Ошибка!")
+        println(ERROR.message)
+        return
     }
 
     listTicket.add(Ticket(userName, userAge, userDepartures, userArrival))
@@ -38,7 +42,7 @@ fun addTicket(listTicket: MutableList<Ticket>) {
 /**
  * Выводит билеты, добавленные в listTicket
  */
-fun myTicket(listTicket: MutableList<Ticket>) {
+fun myTicket(listTicket: TicketList) {
     if (listTicket.isEmpty()) {
         println("У вас нету билетов!\n")
         return
@@ -52,7 +56,7 @@ fun myTicket(listTicket: MutableList<Ticket>) {
 /**
  * Удаление билета
  */
-fun removeTicket(listTicket: MutableList<Ticket>) {
+fun removeTicket(listTicket: TicketList) {
     if (listTicket.isEmpty()) {
         println("У вас нету билетов!\n")
         return
@@ -65,7 +69,8 @@ fun removeTicket(listTicket: MutableList<Ticket>) {
     print("Выберите ID: ")
     val userID = readLine()!!.trim().toIntOrNull()
     if (userID == null || userID < 1 || userID > listTicket.size) {
-        throw IllegalArgumentException("Ошибка!")
+        println(ERROR.message)
+        return
     }
 
     val index = userID - 1
@@ -76,7 +81,7 @@ fun removeTicket(listTicket: MutableList<Ticket>) {
 /**
  * Поиск билетов
  */
-fun ticketSearch(listTicket: MutableList<Ticket>) {
+fun ticketSearch(listTicket: TicketList) {
     if (listTicket.isEmpty()) {
         println("У вас нету билетов!\n")
         return
@@ -86,7 +91,7 @@ fun ticketSearch(listTicket: MutableList<Ticket>) {
     print("Введите город отправления, или город прибытия: ")
     val userCity = readLine()!!.trim()
     if (userCity.isBlank()) {
-        println("Ошибка!\n")
+        println(ERROR.message)
         return
     }
 
