@@ -107,7 +107,38 @@ fun ticketSearch(listTicket: TicketList) {
     search.forEachIndexed { index, ticket ->
         println("${index + 1}. ${ticket.name} (${ticket.age}) - ${ticket.departures} -> ${ticket.arrival}")
     }
-    println()
+
+    print("Купить билет: \"Да\" или \"Нет\": ")
+    val userBuy = readLine()!!.trim()
+    if (userBuy.isBlank()) {
+        println(ERROR)
+        return
+    }
+
+    when(userBuy) {
+        "Да" -> {
+            print("Выберите ID: ")
+            val userID = readLine()!!.trim().toIntOrNull()
+            if (userID == null || userID !in 1..search.size) {
+                println(ERROR)
+                return
+            }
+            val index = search[userID - 1]
+            listTicket.add(index)
+            println("Билет добавлен в раздел: \"Мои\"\n")
+            return
+        }
+
+        "Нет" -> {
+            println()
+            return
+        }
+
+        else -> {
+            println("Нет такой команды!\n")
+            return
+        }
+    }
 }
 
 /**
