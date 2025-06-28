@@ -96,7 +96,8 @@ fun ticketSearch(listTicket: TicketList) {
     }
 
     val search = listTicket.filter {
-        userCity == it.departures || userCity == it.arrival
+        it.departures.contains(userCity, ignoreCase = true) ||
+                it.arrival.contains(userCity, ignoreCase = true)
     }
 
     if (search.isEmpty()) {
